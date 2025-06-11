@@ -63,7 +63,7 @@ const ImageUpload: React.FC = () => {
     files.forEach(file => formData.append('images[]', file));
 
     try {
-      const response = await axios.post('https://localhost:8002/api/images', formData, {
+      const response = await axios.post('http://localhost:8002/api/images', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setMessage(response.data.message);

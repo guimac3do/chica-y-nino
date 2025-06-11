@@ -21,7 +21,7 @@ const Images: React.FC = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('https://localhost:8002/api/images');
+        const response = await axios.get('http://localhost:8002/api/images');
         setImages(response.data);
       } catch (error) {
         console.error('Erro ao carregar imagens:', error);

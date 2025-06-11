@@ -1,4 +1,4 @@
-// public_html/sw.js
+// public/sw.js
 self.addEventListener('install', (event) => {
   console.log('Service Worker instalado');
   event.waitUntil(self.skipWaiting());
@@ -28,7 +28,7 @@ self.addEventListener('fetch', (event) => {
             newFormData.append('images[]', file);
           });
 
-          const response = await fetch('https://localhost:8002/api/admin/share-target', {
+          const response = await fetch('http://localhost:8002/api/cadastro-produto', {
             method: 'POST',
             body: newFormData,
           });

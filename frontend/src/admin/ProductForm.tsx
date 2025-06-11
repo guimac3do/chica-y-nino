@@ -156,7 +156,7 @@ const ProductForm: React.FC = () => {
   const { watch, trigger, setValue } = form;
   const basePrice = watch('preco');
 
-  const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:8002/api';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8002/api';
 
   // Carregar dados iniciais
   useEffect(() => {

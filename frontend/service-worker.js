@@ -28,7 +28,7 @@ self.addEventListener('install', (event) => {
                         });
 
                         // 📌 Envia os arquivos para o Laravel
-                        const response = await fetch('https://localhost:8002/api/admin/share-target', {
+                        const response = await fetch('http://localhost:8002/api/admin/share-target', {
                             method: 'POST',
                             body: newFormData,
                         });

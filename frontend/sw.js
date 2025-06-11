@@ -1,4 +1,3 @@
-// public/sw.js
 self.addEventListener('install', (event) => {
   console.log('Service Worker instalado');
   event.waitUntil(self.skipWaiting());
@@ -28,14 +27,28 @@ self.addEventListener('fetch', (event) => {
             newFormData.append('images[]', file);
           });
 
-          const response = await fetch('https://localhost:8002/api/cadastro-produto', {
-            method: 'POST',
-            body: newFormData,
-          });
+          let response;
+          try {
+            response = await fetch('http://localhost:8002/api/admin/share-target', {
+              method: 'POST',
+              body: newFormData,
+            });
+            console.log('Resposta do fetch:', response.status, response.statusText);
+          } catch (error) {
+            console.error('Erro no fetch:', error);
+            return new Response('Erro ao enviar imagens ao servidor', { status: 500 });
+          }
 
           const redirectUrl = await response.text();
           console.log('Redirecionando para:', redirectUrl);
-          return Response.redirect(redirectUrl, 303);
+
+          // Usa clients.openWindow para navegar
+          await self.clients.openWindow(redirectUrl);
+
+          return new Response('Imagens processadas com sucesso', {
+            status: 200,
+            headers: { 'Content-Type': 'text/plain' },
+          });
         }
 
         console.log('Nenhum arquivo recebido no service worker');
